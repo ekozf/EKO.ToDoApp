@@ -33,6 +33,11 @@ public class TasksController : Controller
 
         var list = await _taskListService.GetAll(userId);
 
+        if (!list.Any())
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
         var items = await _taskService.GetAllFromList(new GetAllTasksListRequest
         {
             Id = list.First(x => x.Title == "Inbox").Id,
