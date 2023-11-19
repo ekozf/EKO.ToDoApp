@@ -28,14 +28,14 @@ public class TasksController : Controller
 
         if (!parsed)
         {
-            return RedirectToAction("Login", "Account");
+            return Redirect("/Account/Login");
         }
 
         var list = await _taskListService.GetAll(userId);
 
         if (!list.Any())
         {
-            return RedirectToAction("Login", "Account");
+            return Redirect("/Account/Login");
         }
 
         var items = await _taskService.GetAllFromList(new GetAllTasksListRequest
@@ -77,7 +77,7 @@ public class TasksController : Controller
 
         if (!parsed)
         {
-            return RedirectToAction("Login", "Account");
+            return Redirect("/Account/Login");
         }
 
         try
@@ -124,7 +124,7 @@ public class TasksController : Controller
 
         if (!parsed)
         {
-            return RedirectToAction("Login", "Account");
+            return Redirect("/Account/Login");
         }
 
         var lists = await _taskListService.GetAll(userId);
@@ -146,7 +146,7 @@ public class TasksController : Controller
 
         if (!parsed)
         {
-            return RedirectToAction("Login", "Account");
+            return Redirect("/Account/Login");
         }
 
         model.UserId = userId;
@@ -163,7 +163,7 @@ public class TasksController : Controller
 
         if (!parsed)
         {
-            return RedirectToAction("Login", "Account");
+            return Redirect("/Account/Login");
         }
 
         request.UserId = userId;
@@ -180,7 +180,7 @@ public class TasksController : Controller
 
         if (!parsed)
         {
-            return RedirectToAction("Login", "Account");
+            return Redirect("/Account/Login");
         }
 
         request.UserId = userId;
@@ -197,7 +197,7 @@ public class TasksController : Controller
 
         if (!parsed)
         {
-            return RedirectToAction("Login", "Account");
+            return Redirect("/Account/Login");
         }
 
         request.UserId = userId;
