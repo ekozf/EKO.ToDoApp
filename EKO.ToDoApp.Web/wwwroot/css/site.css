@@ -1,0 +1,40 @@
+* {
+    font-size: 14px;
+    --theme-clr: hsl(236, 71%, 56%);
+}
+
+
+button.btn.btn-primary.position-fixed {
+    width: 5rem;
+    font-size: 2em !important;
+    text-align: center;
+    vertical-align: middle;
+    height: 5rem;
+}
+
+button.position-fixed > img {
+    width: 75%;
+    height: 100%;
+}
+
+input[type=checkbox]
+{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.fs-7 {
+    font-size: 0.9rem;
+}
+
+span.text-muted img {
+    width: 2.5rem;
+}
+
+.task-container {
+    height: 82.5vh;
+}
+
+div:has(> input:checked) span.fw-bold {
+    text-decoration: line-through;
+}

@@ -1,0 +1,55 @@
+﻿@using EKO.ToDoApp.Web.Models.TasksViewModel
+
+@model CreateTaskViewModel
+
+@{
+    ViewBag.Title = "Create Task";
+}
+
+<h1 class="text-center mt-5">Create Task</h1>
+
+<main class="overflow-y-scroll h-100 pt-5">
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="taskTitle">Task Title</label>
+        <input id="taskTitle" type="text" class="form-control" />
+    </div>
+
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="taskDescription">Description</label>
+        <input id="taskDescription" type="text" class="form-control" />
+    </div>
+
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="taskDueBy">Due By</label>
+        <input id="taskDueBy" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="selectUrgency">Urgency</label>
+        <select id="selectUrgency" class="form-select">
+            @foreach (var item in Model.Urgencies)
+            {
+                <option value="@item.UrgencyId">@item.Urgency</option>
+            }
+        </select>
+    </div>
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="taskList">Category</label>
+        <select id="selectList" class="form-select">
+            @foreach (var item in Model.Lists)
+            {
+                <option value="@item.Id">@item.Title</option>
+            }
+        </select>
+    </div>
+
+    <div class="w-100 d-flex flex-row align-items-center justify-content-center gap-4 mt-5">
+        <button class="btn btn-danger px-5" id="cancelTask">Cancel</button>
+        <button class="btn btn-primary px-5" id="createTask">Create</button>
+    </div>
+
+</main>
+
+@section Scripts {
+    <script src="~/js/Tasks/CreateTask.js" asp-append-version="true"></script>
+}

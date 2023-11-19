@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+
+<main class="bg-body-tertiary m-3 p-3 rounded-3 shadow mt-5">
+    <h1 class="text-center mt-3">Register</h1>
+    <div class="d-flex flex-column align-items-center">
+        <input type="text" placeholder="First Name" class="form-control mb-3 mt-5" id="userFirstName" />
+        <input type="text" placeholder="Last Name" class="form-control mb-3 mt-3" id="userLastName" />
+        <input type="email" placeholder="your@email.com" class="form-control mb-3 mt-3" id="userEmail" />
+        <input type="password" class="form-control mb-5 mt-3" placeholder="y0urP4ssword!" id="userPassword" />
+        <button class="btn btn-primary my-3 w-50" id="registerButton">Register</button>
+
+        <span class="mt-3 text-muted">
+            Already have an account?
+            <a href="/account/login">Log in here!</a>
+        </span>
+    </div>
+</main>
+
+@section Scripts {
+    <script src="~/js/account/RegisterUser.js" type="module"></script>
+}

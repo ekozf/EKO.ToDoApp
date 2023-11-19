@@ -1,0 +1,81 @@
+﻿@using EKO.ToDoApp.Web.Models.TasksViewModel
+@model TaskDetailsViewModel
+
+@{
+    ViewBag.Title = Model.Task.Title;
+}
+
+<h1 class="text-center mt-5">Edit Task</h1>
+
+<main class="overflow-y-scroll h-100 pt-5">
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="taskTitle">Task Title</label>
+        <input id="taskTitle" type="text" class="form-control" value="@Model.Task.Title" />
+    </div>
+
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="taskDescription">Description</label>
+        <input id="taskDescription" type="text" class="form-control" value="@Model.Task.Description" />
+    </div>
+
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="taskDueBy">Due By</label>
+        @if (Model.Task.DueBy.HasValue && Model.Task.DueBy.Value != DateTime.MinValue)
+        {
+            <input id="taskDueBy" type="datetime-local" class="form-control" value='@Model.Task.DueBy.Value.ToString("yyyy-MM-ddTHH:mm")' />
+
+        }
+        else
+        {
+            <input id="taskDueBy" type="datetime-local" class="form-control" />
+        }
+    </div>
+
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="selectUrgency">Urgency</label>
+        <select id="selectUrgency" class="form-select">
+            @foreach (var item in Model.Urgencies)
+            {
+                if (item.UrgencyId == (int)Model.Task.Urgency)
+                {
+                    <option value="@item.UrgencyId" selected>@item.Urgency</option>
+                }
+                else
+                {
+                    <option value="@item.UrgencyId">@item.Urgency</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="bg-body p-3 rounded-3 shadow m-4 d-flex flex-column gap-2">
+        <label for="taskList">Category</label>
+        <select id="selectList" class="form-select">
+            @foreach (var item in Model.Lists)
+            {
+                if (item.Id == Model.Task.TaskListId)
+                {
+                    <option value="@item.Id" selected>@item.Title</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Title</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="w-100 d-flex flex-row align-items-center justify-content-center gap-4 mt-5 mb-5">
+        <input type="hidden" value="@Model.Task.Id" id="taskId" />
+        <button class="btn btn-danger px-5" id="deleteTask">Delete Task</button>
+    </div>
+
+    <div class="w-100 d-flex flex-row align-items-center justify-content-center gap-4 mt-5">
+        <button class="btn btn-warning px-5" id="cancelTask">Cancel</button>
+        <button class="btn btn-primary px-5" id="updateTask">Update</button>
+    </div>
+
+</main>
+
+@section Scripts {
+    <script src="~/js/Tasks/UpdateTask.js" type="module"></script>
+}

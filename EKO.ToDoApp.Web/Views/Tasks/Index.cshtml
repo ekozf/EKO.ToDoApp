@@ -1,0 +1,94 @@
+﻿@using EKO.ToDoApp.Shared.Enums
+@model List<ToDoTaskEntity>
+
+@{
+    ViewBag.Title = "Tasks";
+}
+
+<h1 class="text-center mt-5">Tasks</h1>
+
+<header class="bg-body p-3 rounded-3 shadow m-4">
+    <span class="badge rounded-pill text-bg-primary p-3">Primary</span>
+</header>
+
+<main class="overflow-y-scroll task-container pt-5 pb-5">
+    @foreach (var item in Model)
+    {
+        <div class="bg-body p-3 rounded-3 shadow m-4 d-flex gap-4 align-items-center" data-task="">
+            <input type="checkbox" name="@item.Id" />
+            <div class="d-flex justify-content-between w-100 align-items-center">
+                <div class="d-flex flex-column" data-task-info="@item.Id">
+                    <span class="fw-bold" data-task-title="">@item.Title.Substring(0, Math.Min(15, item.Title.Length)).Trim()</span>
+                    @if (item.Description is not null)
+                    {
+                        <span class="text-muted fs-7">
+                            @item.Description.Substring(0, Math.Min(15, item.Description.Length)).Trim()
+                        </span>
+                    }
+                </div>
+
+                <div>
+                <span class="text-muted fs-7">
+                    @if (item.DueBy is not null && item.DueBy!.Value != DateTime.MinValue)
+                    {
+                        if (item.DueBy.Value.Date == DateTime.Today)
+                        {
+                            <span>Today @@ @item.DueBy.Value.ToString("HH:mm")</span>
+                        }
+                        else if (item.DueBy.Value.Date == DateTime.Today.AddDays(1))
+                        {
+                            <span>Tomorrow @@ @item.DueBy.Value.ToString("HH:mm")</span>
+                        }
+                        else
+                        {
+                            <span>@item.DueBy.Value.ToString("dd-MM-yyyy")</span>
+                        }
+                    }
+                    else
+                    {
+                        <span>Not Set</span>
+                    }
+                </span>
+
+                <span class="text-muted ms-4">
+                    @switch (item.Urgency)
+                    {
+                        case UrgencyEnum.Low:
+                            <span>
+                                <img src="/icons/flag-low-icon.svg" />
+                            </span>
+                            break;
+
+                        case UrgencyEnum.Medium:
+                            <span>
+                                <img src="/icons/flag-medium-icon.svg" />
+                            </span>
+                            break;
+
+                        case UrgencyEnum.High:
+                            <span>
+                                <img src="/icons/flag-high-icon.svg" />
+                            </span>
+                            break;
+
+                        default:
+                            <span>
+                                <img src="/icons/flag-none-icon.svg" />
+                            </span>
+                            break;
+                    }
+                </span>
+                </div>
+            </div>
+        </div>
+    }
+</main>
+
+<button class="position-fixed end-0 bottom-0 me-4 mb-5 btn btn-primary rounded-circle shadow" onclick="window.location.href = '/create'">
+    <img src="/icons/plus-icon.svg" />
+</button>
+
+@section Scripts {
+    <script src="~/js/Tasks/CompleteTask.js" type="module"></script>
+    <script src="~/js/Tasks//ViewTaskDetails.js"></script>
+}
